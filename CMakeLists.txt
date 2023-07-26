@@ -10,7 +10,8 @@ find_package(rclcpp REQUIRED)
 find_package(rclcpp_components REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(PCL 1.12 REQUIRED COMPONENTS common)
-find_package(pcl_conversions REQUIRED)
+# find_package(pcl_conversions REQUIRED)
+find_package(pointcloud_utils REQUIRED)
 find_package(cv_bridge REQUIRED)
 
 set(PUB_HEADERS
@@ -30,7 +31,8 @@ set_target_properties(NativeAdapters PROPERTIES PUBLIC_HEADER "${PUB_HEADERS}")
 target_include_directories(NativeAdapters PUBLIC include)
 
 target_include_directories(NativeAdapters PRIVATE
-  ${pcl_conversions_INCLUDE_DIRS}
+  # ${pcl_conversions_INCLUDE_DIRS}
+  ${pointcloud_utils_INCLUDE_DIRS}
   ${cv_bridge_INCLUDE_DIRS}
 )
 
@@ -56,7 +58,7 @@ install(
 #ament_export_targets(NativeAdapters)
 ament_export_include_directories(include ${PCL_INCLUDE_DIRS})
 ament_export_libraries(NativeAdapters)
-ament_export_dependencies(rclcpp rclcpp_components std_msgs sensor_msgs nav_msgs OpenCV PCL pcl_conversions)
+ament_export_dependencies(rclcpp rclcpp_components std_msgs sensor_msgs nav_msgs OpenCV PCL pointcloud_utils)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

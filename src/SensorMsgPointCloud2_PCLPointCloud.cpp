@@ -2,7 +2,8 @@
 Copyright 2023 Patrick Roncagliolo
 */
 
-#include <pcl_conversions/pcl_conversions.h>
+// #include <pcl_conversions/pcl_conversions.h>
+#include "pointcloud_utils/pcl_utils.hpp"
 
 #include <native_adapters/SensorMsgPointCloud2_PCLPointCloud.hpp>
 #include <rclcpp/logging.hpp>
@@ -58,7 +59,7 @@ void process_message(
   StampedPointCloud_PCL & destination)
 {
   destination.cloud = std::move(pcl::PointCloud<PointT>());
-  pcl::fromROSMsg(source, std::get<pcl::PointCloud<PointT>>(destination.cloud));
+  pointcloud_utils::fromROSMsg(source, std::get<pcl::PointCloud<PointT>>(destination.cloud));
 }
 
 void rclcpp::TypeAdapter<StampedPointCloud_PCL,
@@ -69,7 +70,7 @@ void rclcpp::TypeAdapter<StampedPointCloud_PCL,
   RCLCPP_WARN(rclcpp::get_logger("PointCloud2 Adapter"), "Conversion to message");
   // raise(SIGTRAP);
 
-  std::visit([&](auto && cloud) {pcl::toROSMsg(cloud, destination);}, source.cloud);
+  std::visit([&](auto && cloud) {pointcloud_utils::toROSMsg(cloud, destination);}, source.cloud);
   destination.header = source.header;
 }
 
