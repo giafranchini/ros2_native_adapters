@@ -56,9 +56,9 @@ install(
 )
 
 #ament_export_targets(NativeAdapters)
-ament_export_include_directories(include ${PCL_INCLUDE_DIRS})
+ament_export_include_directories(include ${PCL_INCLUDE_DIRS} ${pointcloud_utils_INCLUDE_DIRS} ${cv_bridge_INCLUDE_DIRS})
 ament_export_libraries(NativeAdapters)
-ament_export_dependencies(rclcpp rclcpp_components std_msgs sensor_msgs nav_msgs OpenCV PCL pointcloud_utils)
+ament_export_dependencies(rclcpp rclcpp_components std_msgs sensor_msgs nav_msgs OpenCV cv_bridge)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
