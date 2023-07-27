@@ -6,6 +6,7 @@ Copyright 2023 Patrick Roncagliolo
 #define NATIVE_ADAPTERS__SENSORMSGPOINTCLOUD2_PCLPOINTCLOUD_HPP_
 
 #include <pcl/common/common.h>
+#include <pointcloud_utils/point_types_custom.hpp>
 
 #include <variant>
 
@@ -27,7 +28,8 @@ struct StampedPointCloud_PCL
     pcl::PointCloud<pcl::PointNormal>,
     pcl::PointCloud<pcl::PointXYZRGBNormal>,
     pcl::PointCloud<pcl::PointXYZLNormal>,
-    pcl::PointCloud<pcl::PointXYZINormal>
+    pcl::PointCloud<pcl::PointXYZINormal>,
+    pcl::PointCloud<pcl::PointXYZIRT>
   > cloud;
 
   StampedPointCloud_PCL() = default;

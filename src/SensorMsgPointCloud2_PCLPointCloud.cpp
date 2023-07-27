@@ -85,6 +85,8 @@ void rclcpp::TypeAdapter<StampedPointCloud_PCL, sensor_msgs::msg::PointCloud2>::
   bool intensity = false;
   bool normals = false;
   bool label = false;
+  bool ring = false;
+  bool time = false;
   for (auto f : source.fields) {
     if (f.name == "rgb") {
       rgb = true;
@@ -101,6 +103,12 @@ void rclcpp::TypeAdapter<StampedPointCloud_PCL, sensor_msgs::msg::PointCloud2>::
     if (f.name == "label") {
       label = true;
     }
+    if (f.name == "ring") {
+      ring = true;
+    }
+    if (f.name == "time") {
+      time = true;
+    }
   }
 
   if (rgba) {
@@ -116,6 +124,8 @@ void rclcpp::TypeAdapter<StampedPointCloud_PCL, sensor_msgs::msg::PointCloud2>::
   } else if (intensity) {
     if (normals) {
       process_message<pcl::PointXYZINormal>(source, destination);
+    } else if (ring && time) {
+      process_message<pcl::PointXYZIRT>(source, destination);
     } else {
       process_message<pcl::PointXYZI>(source, destination);
     }
