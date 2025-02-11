@@ -29,7 +29,8 @@ struct StampedPointCloud_PCL
     pcl::PointCloud<pcl::PointXYZRGBNormal>,
     pcl::PointCloud<pcl::PointXYZLNormal>,
     pcl::PointCloud<pcl::PointXYZINormal>,
-    pcl::PointCloud<pcl::PointXYZIRT>
+    pcl::PointCloud<pcl::PointXYZIRT>,
+    pcl::PointCloud<pcl::PointXYZT>
   > cloud;
 
   StampedPointCloud_PCL() = default;

@@ -87,6 +87,7 @@ void rclcpp::TypeAdapter<StampedPointCloud_PCL, sensor_msgs::msg::PointCloud2>::
   bool label = false;
   bool ring = false;
   bool time = false;
+  bool temperature = false;
   for (auto f : source.fields) {
     if (f.name == "rgb") {
       rgb = true;
@@ -108,6 +109,9 @@ void rclcpp::TypeAdapter<StampedPointCloud_PCL, sensor_msgs::msg::PointCloud2>::
     }
     if (f.name == "time") {
       time = true;
+    }
+    if (f.name == "temperature") {
+      temperature = true;
     }
   }
 
@@ -135,6 +139,8 @@ void rclcpp::TypeAdapter<StampedPointCloud_PCL, sensor_msgs::msg::PointCloud2>::
     } else {
       process_message<pcl::PointXYZ>(source, destination);
     }
+  } else if (temperature) {
+    process_message<pcl::PointXYZT>(source, destination);
   } else {
     if (normals) {
       process_message<pcl::PointXYZLNormal>(source, destination);
